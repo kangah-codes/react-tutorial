@@ -1,30 +1,52 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import Todos from './components/Todos';
+import './App.css';
+import Header from './components/layout/Header';
+import AddTodo from './components/AddTodo';
 
 class App extends React.Component{
-  constructor(){
-    super();
-
-    this.state = {
-      textColor: 'black',
-    }
-
-    this.changeColor = this.changeColor.bind(this);
-
+  state = {
+    todos: [
+      {
+        id: 1,
+        title: "Take out the trash",
+        completed: false
+      },
+      {
+        id: 2,
+        title: "Take out the food",
+        completed: false
+      },
+      {
+        id: 3,
+        title: "Take out the dog",
+        completed: false
+      },
+    ]
   }
 
-  changeColor(){
-    let colors = ['red', 'blue', 'orange', 'green', 'pink', ''];
-    this.setState({textColor: colors[Math.floor(Math.random() * colors.length)]})
+  // toggle completed
+  markComplete = (id) => {
+    this.setState({todos: this.state.todos.map(todo => {
+      if (todo.id === id){
+        todo.completed =!todo.completed
+      }
+      return todo
+    })})
+  }
+
+  delTodo = (id) => {
+    this.setState({todos: [...this.state.todos.filter(todo => todo.id !== id)] })
   }
 
   render(){
     return (
-      <div id="mainDiv">
-          <h1 style={{color:this.state.textColor}}>Press the button to change the color</h1>
-          <button onClick={this.changeColor} id="colorBtn">Change Color</button>
+      <div className="App">
+        <Header />
+        <AddTodo />
+        <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo}/>
       </div>
-    )
+    );
   }
 }
 
