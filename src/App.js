@@ -1,26 +1,28 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 class App extends React.Component{
-  constructor(props){
-    super(props);
+  constructor(){
+    super();
 
     this.state = {
-      data: 'Initial data'
+      textColor: 'black',
     }
 
-    this.updateState = this.updateState.bind(this);
+    this.changeColor = this.changeColor.bind(this);
+
   }
 
-  updateState(e){
-    this.setState({data: e.target.value});
+  changeColor(){
+    let colors = ['red', 'blue', 'orange', 'green', 'pink', ''];
+    this.setState({textColor: colors[Math.floor(Math.random() * colors.length)]})
   }
 
-  render() {
+  render(){
     return (
-      <div>
-        <input type="text" />
-        <button onClick={this.updateState}>Update</button>
-        <h4>State data: {this.state.data}</h4>
+      <div id="mainDiv">
+          <h1 style={{color:this.state.textColor}}>Press the button to change the color</h1>
+          <button onClick={this.changeColor} id="colorBtn">Change Color</button>
       </div>
     )
   }
