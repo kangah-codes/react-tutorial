@@ -11,8 +11,16 @@ export default class NavBar extends React.Component{
 	constructor(){
 		super();
 		this.state = {
-
+			active: 'Home'
 		}
+	}
+
+	pollActive = () => {
+		console.log('Poll active');
+	}
+
+	createActive = () => {
+		console.log('Create active');
 	}
 
 	// render function
@@ -28,13 +36,13 @@ export default class NavBar extends React.Component{
 						<Navbar.Collapse id="responsive-navbar-nav">
 						<Nav className="mr-auto">
 							<Nav.Link href="#">Home</Nav.Link>
-							<Nav.Link href="#">Polls</Nav.Link>
-							<Nav.Link href="#">Create</Nav.Link>
+							<Nav.Link href="#" onClick={this.pollActive.bind(this)}>Polls</Nav.Link>
+							<Nav.Link href="#" onClick={this.createActive.bind(this)}>Create</Nav.Link>
 						</Nav>
 						<Form inline>
 							<Row className="show-grid">
 								<Col className="col-8">
-									<FormControl type="text" placeholder="Search" className="mr-sm-2" />
+									<FormControl type="text" placeholder="Search for a Poll" className="mr-sm-2" />
 								</Col>
 								<Col className="col-4">
 									<Button variant="outline-primary">Search</Button>
