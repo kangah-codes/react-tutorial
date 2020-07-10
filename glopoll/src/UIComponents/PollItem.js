@@ -24,10 +24,22 @@ export default class PollItem extends React.Component{
 						</Card.Text>
 						<Row>
 							<Col>
-								<Button variant="success" style={{width: '100%'}} onClick={this.props.voteYes.bind(this, id)}>{choiceOne}</Button>
+								<Button 
+									className={id+'poll'}
+									variant="success" 
+									style={{width: '100%'}} 
+									onClick={(e) => {this.props.voteYes(e.target, id)}}>
+									{choiceOne}
+								</Button>
 							</Col>
 							<Col>
-								<Button variant="danger" style={{width: '100%'}} onClick={this.props.voteNo.bind(this, id)}>{choiceTwo}</Button>
+								<Button 
+									className={id+'poll'}
+									variant="danger" 
+									style={{width: '100%'}} 
+									onClick={(e) => {this.props.voteNo(e.target, id)}}>
+									{choiceTwo}
+								</Button>
 							</Col>
 						</Row>
 						<Row>

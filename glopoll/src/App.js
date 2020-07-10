@@ -5,11 +5,16 @@ import NavBar from './UIComponents/Navbar.js';
 import Poll from './UIComponents/Poll.js';
 import { Container, Row, Col, CardGroup } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
+import User from './Logic/UserProfile';
+// global variable
+var newUser;
 
 class App extends React.Component {
 	constructor() {
 		super();
+
+		newUser = new User('1');
+		localStorage.setItem(newUser.id.toString(), newUser.getPoll())
 
 		this.state = {
 			polls: [
@@ -74,7 +79,7 @@ class App extends React.Component {
 					choiceTwo: 'Django'
 				},
 				{
-					id: 5,
+					id: 6,
 					title: "Flask or Django?",
 					text: "Which do you prefer?",
 					yesVotes: 0,
@@ -86,7 +91,7 @@ class App extends React.Component {
 					choiceTwo: 'Django'
 				},
 				{
-					id: 5,
+					id: 7,
 					title: "Flask or Django?",
 					text: "Which do you prefer?",
 					yesVotes: 0,
@@ -98,7 +103,7 @@ class App extends React.Component {
 					choiceTwo: 'Django'
 				},
 				{
-					id: 5,
+					id: 8,
 					title: "Flask or Django?",
 					text: "Which do you prefer?",
 					yesVotes: 0,
@@ -109,33 +114,37 @@ class App extends React.Component {
 					choiceOne: 'Flask',
 					choiceTwo: 'Django'
 				},
-			]
+			],
 		}
 	}
 
-	voteYes = (id) => {
+	voteYes = (e, id) => {
+		var btnArray = document.getElementsByClassName(`${id}poll`);
+		for (let i=0; i<btnArray.length; i++){
+			btnArray[i].disabled = true;
+		}
 		this.setState(this.state.polls.map((poll) => {
 			if (poll.id === id){
 				poll.yesVotes += 1
 				poll.voted += 1
+				newUser.addPoll(poll.id);
+				this.findPercent(id);
 			}
-
-			this.findPercent(id);
-
-			return poll;
 		}))
 	}
 
-	voteNo = (id) => {
+	voteNo = (e, id) => {
+		var btnArray = document.getElementsByClassName(`${id}poll`);
+		for (let i=0; i<btnArray.length; i++){
+			btnArray[i].disabled = true;
+		}
 		this.setState(this.state.polls.map((poll) => {
 			if (poll.id === id){
 				poll.noVotes += 1
 				poll.voted += 1
+				newUser.addPoll(poll.id);
+				this.findPercent(id);
 			}
-
-			this.findPercent(id);
-
-			return poll;
 		}))
 	}
 
@@ -151,6 +160,7 @@ class App extends React.Component {
 	}
 
 	render() {
+
 		return (
 			<div>
 		    	<NavBar />
