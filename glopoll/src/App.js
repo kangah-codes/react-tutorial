@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import NavBar from './UIComponents/Navbar.js';
 import Poll from './UIComponents/Poll.js';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, CardGroup } from 'react-bootstrap';
 
 class App extends React.Component {
 	constructor() {
@@ -49,7 +49,9 @@ class App extends React.Component {
 		    	<Container>
 		    		<div style={{paddingTop: '10%'}} align="center">
 		    			<Row>
-		    				<Poll polls={this.state.polls} />
+		    				<CardGroup style={{width:'100%'}}>
+		    					<Poll polls={this.state.polls} />
+		    				</CardGroup>
 	    				</Row>
 	    			</div>
 	    		</Container>
