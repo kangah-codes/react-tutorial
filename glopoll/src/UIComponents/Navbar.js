@@ -39,8 +39,8 @@ export default class NavBar extends React.Component{
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 						<Navbar.Collapse id="responsive-navbar-nav">
 						<Nav className="mr-auto">
-							<Nav.Link href="/">Home</Nav.Link>
-							<Nav.Link href="/create">Create</Nav.Link>
+							<Nav.Link href="/" active={window.location.pathname === '/'}>Home</Nav.Link>
+							<Nav.Link href="/create" active={window.location.pathname === '/create'}>Create</Nav.Link>
 						</Nav>
 						<Form inline>
 							<Row className="show-grid">
@@ -65,7 +65,7 @@ export default class NavBar extends React.Component{
 					</Route>
 					<Route path="/create">
 						<Container fluid="md">
-							<Create />
+							<Create addPoll={this.props.addPoll}/>
 						</Container>
 					</Route>
 				</Switch>
