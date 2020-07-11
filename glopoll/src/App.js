@@ -13,7 +13,6 @@ class App extends React.Component {
 	constructor() {
 		super();
 
-
 		newUser = new User('1');
 		localStorage.setItem(newUser.id.toString(), newUser.getPoll())
 
@@ -30,7 +29,7 @@ class App extends React.Component {
 					noPercent: 37.5,
 					choiceOne: 'Flask',
 					choiceTwo: 'Django',
-					willExpireOn: '1 47',
+					willExpireOn: '1 48',
 					isExpired: false,
 				},
 				{
@@ -188,12 +187,14 @@ class App extends React.Component {
 
 		return (
 			<div>
-		    	<NavBar />
-		    	<Container fluid="md">
-		    			<Row>
-		    				<Poll polls={this.state.polls} voteYes={this.voteYes} voteNo={this.voteNo} killPoll={this.killPoll} />
-	    				</Row>
-	    		</Container>
+				<Router>
+			    	<NavBar />
+			    	<Container fluid="md">
+			    			<Row>
+			    				<Poll polls={this.state.polls} voteYes={this.voteYes} voteNo={this.voteNo} killPoll={this.killPoll} />
+		    				</Row>
+		    		</Container>
+	    		</Router>
 			</div>
 		);
 	}
