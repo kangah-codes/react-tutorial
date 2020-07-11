@@ -19,11 +19,6 @@ export default class Create extends React.Component{
 		this.setState({time: e.target.value})
 	}
 
-	// addPoll = (e) => {
-	// 	e.preventDefault();
-	// 	console.log(e)
-	// }
-
 
 	render(){
 		return (
@@ -57,8 +52,8 @@ export default class Create extends React.Component{
 			    	<Form.Control type="range" min="0.1" max="24" step="0.1" onChange={(e) => {this.setTimer(e)}} name="expire" />
 			  	</Form.Group>
 
-				<Button variant="primary" type="submit">
-					Submit
+				<Button variant="success" type="submit">
+					Create
 				</Button>
 			</Form>
 		)

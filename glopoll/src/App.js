@@ -82,12 +82,25 @@ class App extends React.Component {
 
 
 	addPoll = (e) => {
-		console.log(JSON.parse(localStorage.getItem('polls')))
+		e.preventDefault();
+		let timer = e.target.expire.value.toString().replace('.', ' ').split(' ')
+		let now = new Date();
+		let hour = now.getHours();
+		let minutes = now.getMinutes();
+		timer[0] = parseInt(timer[0], 10)
+		timer[1] = parseInt(timer[1], 10)
+		if (timer[0] == 0){
+			var time = `${hour} ${(timer[1]+(minutes))}`
+		}else{
+			var time = `${(timer[0]+hour)%12} ${(timer[1]+minutes)}`
+		}
+		let id = uuid();
+		console.log(time)
 		this.setState({
 			polls: [
 				...JSON.parse(localStorage.getItem('polls')), 
 				{
-					id: 10,
+					id: id,
 					title: e.target.title.value,
 					text: e.target.description.value,
 					yesVotes: 0,
@@ -97,17 +110,15 @@ class App extends React.Component {
 					noPercent: 0,
 					choiceOne: e.target.choiceOne.value,
 					choiceTwo: e.target.choiceTwo.value,
-					willExpireOn: '7 30',
+					willExpireOn: time,
 					isExpired: false,
 				}
 			]
 		});
 
-
-
 		localStorage.setItem('polls', JSON.stringify([
 			...this.state.polls, {
-					id: 10,
+					id: id,
 					title: e.target.title.value,
 					text: e.target.description.value,
 					yesVotes: 0,
@@ -117,7 +128,7 @@ class App extends React.Component {
 					noPercent: 0,
 					choiceOne: e.target.choiceOne.value,
 					choiceTwo: e.target.choiceTwo.value,
-					willExpireOn: '7 30',
+					willExpireOn: time,
 					isExpired: false,
 				}]))
 	}
