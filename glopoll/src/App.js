@@ -30,7 +30,7 @@ class App extends React.Component {
 					choiceOne: 'Flask',
 					choiceTwo: 'Django',
 					willExpireOn: '1 48',
-					isExpired: false,
+					isExpired: true,
 				},
 				{
 					id: 2,
@@ -187,14 +187,10 @@ class App extends React.Component {
 
 		return (
 			<div>
-				<Router>
-			    	<NavBar />
-			    	<Container fluid="md">
-			    			<Row>
-			    				<Poll polls={this.state.polls} voteYes={this.voteYes} voteNo={this.voteNo} killPoll={this.killPoll} />
-		    				</Row>
-		    		</Container>
-	    		</Router>
+		    	<NavBar polls={this.state.polls} voteYes={this.voteYes} voteNo={this.voteNo} killPoll={this.killPoll} />
+		    	<Container fluid="md">
+	    			
+	    		</Container>
 			</div>
 		);
 	}
