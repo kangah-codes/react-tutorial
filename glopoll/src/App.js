@@ -3,7 +3,7 @@ import './App.css';
 import NavBar from './UIComponents/Navbar.js';
 import Poll from './UIComponents/Poll.js';
 import { Container, Row, Col, CardGroup } from 'react-bootstrap';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import User from './Logic/UserProfile';
 import {v4 as uuid} from 'uuid';
 
@@ -76,6 +76,7 @@ class App extends React.Component {
 		this.setState(this.state.polls.map((poll) => {
 			if (poll.id === id){
 				poll.isExpired = true;
+				localStorage.setItem('polls', JSON.stringify(this.state.polls))
 			}
 		}))
 	}
@@ -95,7 +96,6 @@ class App extends React.Component {
 			var time = `${(timer[0]+hour)%12} ${(timer[1]+minutes)}`
 		}
 		let id = uuid();
-		console.log(time)
 		this.setState({
 			polls: [
 				...JSON.parse(localStorage.getItem('polls')), 
@@ -131,6 +131,8 @@ class App extends React.Component {
 					willExpireOn: time,
 					isExpired: false,
 				}]))
+
+		window.location.href = '/'
 	}
 
 	render() {
