@@ -36,7 +36,6 @@ export default class NavBar extends React.Component{
 						<Navbar.Collapse id="responsive-navbar-nav">
 						<Nav className="mr-auto">
 							<Nav.Link href="#">Home</Nav.Link>
-							<Nav.Link href="#" onClick={this.pollActive.bind(this)}>Polls</Nav.Link>
 							<Nav.Link href="#" onClick={this.createActive.bind(this)}>Create</Nav.Link>
 						</Nav>
 						<Form inline>
