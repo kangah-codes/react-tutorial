@@ -15,9 +15,15 @@ class App extends React.Component {
 		super();
 
 		newUser = new User('1');
-
+		let storedpolls = localStorage.getItem('polls');
+		try {
+			storedpolls = JSON.parse(storedpolls);
+		}catch(e){
+			console.error(e);
+		}
+		
 		this.state = {
-			polls: JSON.parse(localStorage.getItem('polls'))
+			polls: !storedpolls ? [] : storedpolls
 		}
 
 		localStorage.setItem('polls', JSON.stringify(this.state.polls))
